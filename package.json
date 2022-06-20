@@ -1,0 +1,23 @@
+{
+  "name": "weatherwebpage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Edvardsn/WeatherWebpage.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Edvardsn/WeatherWebpage/issues"
+  },
+  "homepage": "https://github.com/Edvardsn/WeatherWebpage#readme",
+  "dependencies": {
+    "jquery": "^3.6.0"
+  }
+}
