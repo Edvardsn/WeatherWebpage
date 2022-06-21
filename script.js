@@ -5,7 +5,8 @@ const iconNames = ['sun','cloud','rain','storm','snow'];
 
 const currentDay = new Date().getDay();
 
-const ålesundCoordinates = ['62.4709','6.15464','6'];
+//const ålesundCoordinates = ['62.4709','6.15464','6'];
+const ålesundCoordinates = ['63.4709','10.39464','6'];
 
 
 /* Retrieves the data from given location*/
@@ -81,6 +82,10 @@ function findMatchingIcon(iconDescription){
         dayToBeAdded = 'cloudy';
     }
 
+    if(stormyWeather){
+        dayToBeAdded = "stormy";
+    }
+
     return dayToBeAdded;
 }
 
@@ -96,7 +101,11 @@ function initializeIcons(){
 
             let daySummary = array[index]['data']['next_12_hours']['summary']['symbol_code'];
 
-            allDays.children.item(index).appendChild(document.querySelector('.' + findMatchingIcon(daySummary)));
+            let currentDayIcon = allDays.children.item(index);
+
+            //let iconClone = document.getElementsByClassName('.' + findMatchingIcon(daySummary));
+
+            currentDayIcon.classList.add(findMatchingIcon(daySummary));
 
             index = index + 1;
         }
@@ -117,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // var fifthIcon = document.querySelector('#day5');
     // var sixthIcon = document.querySelector('#day6');
     // var seventhIcon = document.querySelector('#day7');
-
+    //
     //
     // firstIcon.classList.add('rainy');
     // secondIcon.classList.add('stormy');
