@@ -50,27 +50,6 @@ function findMatchingIcon(iconDescription){
     let stormyWeather = iconDescription.includes('storm');
     let snowyWeather = iconDescription.includes('snow');
 
-    switch (iconDescription){
-        case(iconDescription.includes('rain')):
-            dayToBeAdded = 'rainy';
-            break;
-        case(iconDescription.includes('clear')):
-            dayToBeAdded = 'sunny';
-            break;
-        case(cloudyWeather):
-            dayToBeAdded = 'cloudy';
-            break;
-        case(stormyWeather):
-            dayToBeAdded = 'stormy';
-            break;
-        case(snowyWeather):
-            dayToBeAdded = 'snowy';
-            break;
-
-        default:
-            dayToBeAdded = 'sunny';
-    }
-
     if(rainyWeather){
         dayToBeAdded = 'rainy';
     }
@@ -118,23 +97,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
     initializeIcons();
 
-    // // $ SELECTOR??
-    // var firstIcon = document.querySelector('#day1');
-    // var secondIcon = document.querySelector('#day2');
-    // var thirdIcon = document.querySelector('#day3');
-    // var fourthIcon = document.querySelector('#day4');
-    // var fifthIcon = document.querySelector('#day5');
-    // var sixthIcon = document.querySelector('#day6');
-    // var seventhIcon = document.querySelector('#day7');
-    //
-    //
-    // firstIcon.classList.add('rainy');
-    // secondIcon.classList.add('stormy');
-    // thirdIcon.classList.add('cloudy');
-    // fourthIcon.classList.add('snowy');
-    // fifthIcon.classList.add('cloudy');
-    // sixthIcon.classList.add('rainy');
-    // seventhIcon.classList.add('sunny');
+    let weekDays = document.querySelector('.weekDays');
+
+    let counter = 0;
+
+    while(counter < weekDays.classList.length){
+
+        let currentIndex = counter % 6;
+
+        weekDays.classList.add(weekdaysMap[counter])
+    }
 
   });
 
