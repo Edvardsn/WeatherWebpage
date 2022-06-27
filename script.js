@@ -1,21 +1,39 @@
 
-const weekdaysMap = [[0,'Mon'],[1,'Thu'],[2,'Wed'],[3,'Thu'],[4,'Fri'],[5,'Sat'],[6,'Sun']];
-
-const iconNames = ['sun','cloud','rain','storm','snow'];
-
+const weekdaysMap = new Map([[0,'Mon'],[1,'Thu'],[2,'Wed'],[3,'Thu'],[4,'Fri'],[5,'Sat'],[6,'Sun']]) ;
+const numberOfDaysDisplayed = 7;
 const currentDay = new Date().getDay();
 
-//const ålesundCoordinates = ['62.4709','6.15464','6'];
-const ålesundCoordinates = ['63.4709','10.39464','6'];
+let globalCityName = undefined;
+let currentLatitude = undefined;
+let currentLongitude = undefined;
 
+/* Retrieves the data representing the city of the client */
+async function fetchCityInformation(){
+
+    const locationData = await fetch("http://ip-api.com/json");
+
+    const locationDataJSON = await locationData.json();
+
+    const cityName = locationDataJSON["city"];
+
+    globalCityName = cityName;
+    currentLatitude = locationDataJSON["lat"];
+    currentLongitude = locationDataJSON["lon"];
+
+    let newCityNameNode = document.querySelector("h1");
+    let newCityName = document.createTextNode(cityName);
+    newCityNameNode.append(newCityName);
+
+    initializeIcons();
+}
 
 /* Retrieves the data from given location*/
 async function fetchWeatherDataArray(){
 
-let requestWeatherJSON = 'https://api.met.no/weatherapi/locationforecast/2.0/compact?altitude=' + ålesundCoordinates[2] + '&lat=' + ålesundCoordinates[1] + 
-'&lon=' + ålesundCoordinates[0];
+let requestWeatherJSON = 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=' + currentLatitude
+    + '&lon=' + currentLongitude;
 let request = new Request(requestWeatherJSON);
-let response = await fetch(request);
+let response =  await fetch(request);
 let weatherData = await response.json();
 
 let weatherReports = weatherData['properties']['timeseries'];
@@ -42,9 +60,10 @@ return presentableWeatherReports;
 
 /* Returns the number corresponding to weather description */
 function findMatchingIcon(iconDescription){
-    var dayToBeAdded = undefined;
+    var dayToBeAdded = 'cloudy';
 
     let sunnyWeather = iconDescription.includes('clear');
+    let partlyCloudyWeather = iconDescription.includes('partlycloudy') || iconDescription.includes('fair');
     let cloudyWeather = iconDescription.includes('cloud') || iconDescription.includes('fog');
     let rainyWeather = iconDescription.includes('rain') || iconDescription.includes('sleet');
     let stormyWeather = iconDescription.includes('storm');
@@ -65,6 +84,10 @@ function findMatchingIcon(iconDescription){
         dayToBeAdded = "stormy";
     }
 
+    if(partlyCloudyWeather){
+       dayToBeAdded = 'partly_cloudy';
+    }
+
     return dayToBeAdded;
 }
 
@@ -82,30 +105,34 @@ function initializeIcons(){
 
             let currentDayIcon = allDays.children.item(index);
 
-            //let iconClone = document.getElementsByClassName('.' + findMatchingIcon(daySummary));
-
             currentDayIcon.classList.add(findMatchingIcon(daySummary));
 
             index = index + 1;
         }
     });
-
 }
 
 /* Main function */
 document.addEventListener("DOMContentLoaded", function() {
 
-    initializeIcons();
+    fetchCityInformation();
 
     let weekDays = document.querySelector('.weekDays');
 
-    let counter = 0;
+    let currentIndex = currentDay;
+    let createdWeekdays = 0;
 
-    while(counter < weekDays.classList.length){
+    while(createdWeekdays < numberOfDaysDisplayed){
 
-        let currentIndex = counter % 6;
+        let textOfTheDay = weekdaysMap.get(currentIndex % 7);
 
-        weekDays.classList.add(weekdaysMap[counter])
+        let weekDayElement = document.createElement("div");
+        let weekDayText = document.createTextNode(textOfTheDay);
+        weekDayElement.appendChild(weekDayText);
+        weekDays.append(weekDayElement);
+
+        currentIndex = currentIndex + 1;
+        createdWeekdays += 1;
     }
 
   });

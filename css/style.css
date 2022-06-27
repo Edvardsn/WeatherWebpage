@@ -74,10 +74,71 @@ body {
     position: absolute;
   }
 
+  .partly_cloudy{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-left: 20px;
+    background: #ffee44;
+    position: relative;
+    box-shadow: rgba(255,255,0,0.2) 0 0 0 15px;
+    transform: translateY(-15px) ;
+  }
+  .partly_cloudy::after{
+    animation: cloud_top ease-in-out 5s infinite;
+    content: '';
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow:
+            #FFFFFF 60px -15px 0 -5px,
+            #FFFFFF 20px -25px,
+            #FFFFFF 25px 10px,
+            #FFFFFF 55px 15px 0 -10px,
+            #FFFFFF 80px 5px 0 -5px;
+    position: absolute;
+    margin-left: 30px;
+    margin-top: 5px;
+    transform: scale(0.6);
+  }
+  .partly_cloudy::before{
+    animation: cloud_bottom ease-in-out 5s infinite;
+    content: '';
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow:
+            #FFFFFF 60px -15px 0 -5px,
+            #FFFFFF 20px -25px,
+            #FFFFFF 25px 10px,
+            #FFFFFF 55px 15px 0 -10px,
+            #FFFFFF 80px 5px 0 -5px;
+    position: absolute;
+    margin-left: -35px;
+    margin-top: 40px;
+    transform: scale(0.6);
+
+  }
+
+  @keyframes cloud_top {
+    50%{
+      margin-top: 10px;
+    }
+  }
+
+@keyframes cloud_bottom {
+  50%{
+    margin-top: 30px;
+    margin-bottom: 8px;
+  }
+}
+
   /* Sunny*/
 .sunny{
-  animation: sunnyMove 15s ease-in-out infinite;
-  animation: sunny 25s linear infinite;
+  /*animation: sunnyMove 15s ease-in-out infinite;*/
+  animation: sunny 50s linear infinite;
   width: 20px;
   height: 140px;
   position: relative;
@@ -108,16 +169,16 @@ body {
   box-shadow: rgba(255,255,0,0.2) 0 0 0 15px;
 }
 
-@keyframes sunnyMove { 
-  50% { transform: scale(1.1) translateY(-20px); }
+@keyframes sunnyMove {
+  50% { transform: scale(1.2) translateY(-20px); }
 }
 
 @keyframes sunny {
     0%{
         transform: rotate(0deg);
     }
-    
-    100%{
+
+    50%{
         transform: rotate(360deg);
     }
 }
@@ -128,7 +189,7 @@ body {
     background: #FFFFFF;
     border-radius: 50%;
     box-shadow: 
-    #FFFFFF 65px -15px 0 -5px, 
+    #FFFFFF 65px -15px 0 -5px,
     #FFFFFF 25px -25px, 
     #FFFFFF 30px 10px, 
     #FFFFFF 60px 15px 0 -10px, 
