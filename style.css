@@ -13,36 +13,39 @@ body {
     display: table-cell;
     vertical-align: middle;
     font-family:'Raleway',sans-serif; ;
-    background: #5771a9; 
+    background: #5a7cce;
+
 }
   h1 {
     text-align: center;
-    font-weight: 400;
-    position: absolute;
-    width: 100%;
-    font-size: 80px;
     margin:auto;
-    opacity: .6;
-    font-family: "Trebuchet MS", Tahoma, sans-serif;
+
+    font-weight: 400;
+    width: 100%;
+    font-size: 100px;
     letter-spacing: 2px;
+    opacity: .6;
+
+    font-family: "Trebuchet MS", Tahoma, sans-serif;
     position: relative;
   }
 
-  /* Containers */
+  /* Templates for weather icons */
   .weatherIcons{
     visibility: hidden;
     width: 0;
     height: 0;
   }
 
+  /* Container for the day of the week */
   .weekDays{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 3rem;
 
     margin:auto;
-    margin-top: 20px;
-    transform: scale(.9);
+    margin-top: 50px;
+    transform: scale(1.1);
     padding-left: 75px;
 
     width: 1200px;
@@ -53,7 +56,8 @@ body {
     letter-spacing: 2px;
     opacity: .6;
   }
-  
+
+ /* Container for the weather icons */
   .days {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -62,7 +66,7 @@ body {
     margin:auto;
     margin-top: 180px;
 
-    transform: scale(.9);
+    transform: scale(1.1);
     width: 1200px;
     height: 100px;
 
@@ -70,10 +74,7 @@ body {
     visibility: visible;
   }
 
-  .days > * {
-    position: absolute;
-  }
-
+  /* Partly cloudy icon */
   .partly_cloudy{
     width: 80px;
     height: 80px;
@@ -124,21 +125,19 @@ body {
 
   @keyframes cloud_top {
     50%{
-      margin-top: 10px;
+      transform: translateX(10px) scale(0.6);
     }
   }
 
 @keyframes cloud_bottom {
   50%{
-    margin-top: 30px;
-    margin-bottom: 8px;
+    transform: translateX(-10px) scale(0.6);
   }
 }
 
-  /* Sunny*/
+  /* Sunny icon*/
 .sunny{
-  /*animation: sunnyMove 15s ease-in-out infinite;*/
-  animation: sunny 50s linear infinite;
+  animation: sunny 30s linear infinite;
   width: 20px;
   height: 140px;
   position: relative;
@@ -169,21 +168,17 @@ body {
   box-shadow: rgba(255,255,0,0.2) 0 0 0 15px;
 }
 
-@keyframes sunnyMove {
-  50% { transform: scale(1.2) translateY(-20px); }
-}
-
 @keyframes sunny {
     0%{
         transform: rotate(0deg);
     }
 
-    50%{
+    100%{
         transform: rotate(360deg);
     }
 }
 
-  /* CLOUDY */
+  /* Cloudy Icon */
   .cloudy {
     animation: cloudy 10s ease-in-out infinite;
     background: #FFFFFF;
@@ -218,22 +213,24 @@ body {
   @keyframes cloudy_shadow {
     50% { transform: translateY(20px) scale(.7); opacity:.05; }
   }
-  
+
+  /* Rainy icon */
   .rainy {
     animation: rainy 12s ease-in-out infinite 1s;
-    background: #CCCCCC; 
+    background: #CCCCCC;
     border-radius: 50%;
-    box-shadow: 
-      #CCCCCC 65px -15px 0 -4px, 
-      #CCCCCC 25px -25px, 
-      #CCCCCC 30px 10px, 
-      #CCCCCC 60px 15px 0 -10px, 
+    box-shadow:
+      #CCCCCC 65px -15px 0 -4px,
+      #CCCCCC 25px -25px,
+      #CCCCCC 30px 10px,
+      #CCCCCC 60px 15px 0 -10px,
       #CCCCCC 85px 5px 0 -5px;
     display: block;
     height: 50px;
     width: 50px;
     position: relative;
   }
+
   .rainy:after {
     animation: rainy_shadow 12s ease-in-out infinite 1s;
     background: #000000;
@@ -243,12 +240,13 @@ body {
     width: 120px;
     opacity: 0.2;
     position: absolute;
-    left: 5px; 
+    left: 5px;
     bottom: -60px;
     transform: scale(1);
   }
+
   .rainy:before {
-    animation: rainy_rain 1s infinite linear;
+    animation: rainy_rain 2s infinite linear;
     content: '';
     background: #CCCCCC;
     border-radius: 50%;
@@ -265,19 +263,19 @@ body {
     50% { transform: translateY(20px) scale(.7); opacity: 0.05; }
   }
   @keyframes rainy_rain {
-    0% {  
-      box-shadow: 
-        rgba(0,0,0,0) 30px 30px, 
-        rgba(0,0,0,0) 40px 40px,  
-        #000 50px 75px, 
-        #000 55px 50px, 
-        #000 70px 100px, 
-        #000 80px 95px, 
-        #000 110px 45px, 
-        #000 90px 35px; 
+    0% {
+      box-shadow:
+        rgba(0,0,0,0) 30px 30px,
+        rgba(0,0,0,0) 40px 40px,
+        #000 50px 75px,
+        #000 55px 50px,
+        #000 70px 100px,
+        #000 80px 95px,
+        #000 110px 45px,
+        #000 90px 35px;
     }
-    25% {  
-        box-shadow: 
+    25% {
+        box-shadow:
         #000 30px 45px,
         #000 40px 60px,
         #000 50px 90px,
@@ -287,7 +285,7 @@ body {
         #000 110px 70px,
         #000 90px 60px;
     }
-    26% {  
+    26% {
       box-shadow:
         #000 30px 45px,
         #000 40px 60px,
@@ -296,9 +294,9 @@ body {
         rgba(0,0,0,0) 70px 40px,
         rgba(0,0,0,0) 80px 20px,
         #000 110px 70px,
-        #000 90px 60px; 
+        #000 90px 60px;
     }
-    50% { 
+    50% {
       box-shadow:
         #000 30px 70px,
         #000 40px 80px,
@@ -354,9 +352,8 @@ body {
         #000 90px 35px;
     }
   }
-
   
-  /* STORMY */
+  /* Stormy Icon */
   .stormy {
     animation: stormy 11s ease-in-out infinite;
     background: #222222;
@@ -414,7 +411,7 @@ body {
     15% { transform: rotate(-34deg); opacity:0; }
   }
   
-  /* SNOWY */
+  /* Snowy Icon */
   .snowy {
     animation: snowy 9s ease-in-out infinite 1s;
     background: #FFFFFF; 
