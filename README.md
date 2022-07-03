@@ -7,4 +7,4 @@ The intended use of this webpage is as an animated wallpaper using the Wallpaper
 The actual weather forecast is provided by MET Norway. https://api.met.no/doc/
 which provides the actual weather summary from the users location.
 
-To obtain information about the users whereabouts of the user IP-API is used. https://ip-api.com/ 
+To obtain information about the users whereabouts IP-API is used. https://ip-api.com/ 
